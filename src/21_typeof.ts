@@ -20,6 +20,23 @@ function describeTypeOf(x: unknown) {
   if (typeof x === "function") {
     return `${x} is a function.`;
   }
+  if (x === null) {
+    return `${null} is typeof null`;
+  }
+  if (Array.isArray(x)) {
+    return `${x.length === 0 ? `[]` : "[" + x + "]"} is typeof array`;
+  }
+
+  if (x instanceof Date) {
+    return `${x} is typeof/instanceof Date`;
+  }
+  if (x instanceof Error) {
+    return `${x} is typeof/instanceof Error`;
+  }
+
+  if (typeof x === "object") {
+    return `${x} is typeof object`;
+  }
 }
 const btnEl = document.createElement("button");
 
@@ -34,7 +51,7 @@ console.log(
   describeTypeOf(null),
   describeTypeOf({}),
   describeTypeOf([]),
-  describeTypeOf(btnEl),
+  describeTypeOf(btnEl), // will match typeof object
   describeTypeOf(NaN), // will macth typeof number
   describeTypeOf(new Date()), //will match typeof object
   describeTypeOf(new Error("Ops! An error occured!")), //will match typeof object
